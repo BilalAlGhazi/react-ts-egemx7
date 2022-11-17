@@ -8,5 +8,5 @@ interface Props {
 }
 
 export const Column = ({ dataPath, width, render }: Props) => {
-  return <>c</>;
+  return null;
 };

@@ -12,5 +12,5 @@ export const Settings = ({ dataSource }: Props) => {
     setDataSource && setDataSource(dataSource);
   }, [dataSource]);
 
-  return <></>;
+  return null;
 };

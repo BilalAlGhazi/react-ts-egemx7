@@ -11,35 +11,43 @@ const GridComponent = ({ children }: Props) => {
   const [dataSource, setDataSource] = useState<DataSourceItem[]>();
 
   const renderSettings = () => {
-    return Children.map(children, (child) =>
-      child.type.name === 'Settings' ? child : null
+    return Children.toArray(
+      Children.map(children, (child) =>
+        child.type.name === 'Settings' ? child : null
+      )
     );
   };
 
   const renderHeader = () => {
-    return Children.map(children, (child) =>
-      child.type.name === 'Column' ? (
-        <td width={child.props.width}>{child.props.dataPath}</td>
-      ) : null
+    return Children.toArray(
+      Children.map(children, (child) =>
+        child.type.name === 'Column' ? (
+          <td width={child.props.width}>{child.props.dataPath}</td>
+        ) : null
+      )
     );
   };
 
   const renderDataRow = (item: DataSourceItem) => {
-    return Children.map(children, (child) =>
-      child.type.name === 'Column' ? (
-        <td>
-          {child.props.render
-            ? child.props.render(item[child.props.dataPath])
-            : item[child.props.dataPath].toString()}
-        </td>
-      ) : null
+    return Children.toArray(
+      Children.map(children, (child) =>
+        child.type.name === 'Column' ? (
+          <td>
+            {child.props.render
+              ? child.props.render(item[child.props.dataPath])
+              : item[child.props.dataPath].toString()}
+          </td>
+        ) : null
+      )
     );
   };
 
   const renderBody = () => {
-    return dataSource?.map((item) => {
-      return <tr>{renderDataRow(item)}</tr>;
-    });
+    return Children.toArray(
+      dataSource?.map((item) => {
+        return <tr>{renderDataRow(item)}</tr>;
+      })
+    );
   };
 
   return (
